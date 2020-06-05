@@ -21,26 +21,20 @@ def automate(mail, passwd, index):
             EC.visibility_of_element_located((By.NAME, 'identifier'))
         )
         eid.send_keys(mail)
-        #driver.find_element_by_name("identifier").send_keys(mail)
         driver.find_element_by_xpath("//*[@id='identifierNext']/span/span").click()
-        #driver.implicitly_wait(20)
         passd = WebDriverWait(driver, 150).until(
             EC.visibility_of_element_located((By.NAME, 'password'))
         )
         passd.send_keys(passwd)
-        #driver.find_element_by_name("password").send_keys(passwd)
         driver.find_element_by_xpath("//*[@id='passwordNext']/span/span").click()
-        #driver.implicitly_wait(30)
         emails = WebDriverWait(driver, 150).until(
             EC.visibility_of_all_elements_located((By.CLASS_NAME, 'zA'))
         )
-        #emails = driver.find_elements_by_class_name('zA')
         emails[index].click()
         body = WebDriverWait(driver, 150).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'a3s'))
         )
         content = body.text
-        #body = driver.find_element_by_class_name('a3s').text
         fname = 'body' + str(index + 1) + '.txt'
         with open(fname, 'w') as wfile:
             wfile.write(content)
@@ -77,33 +71,15 @@ if __name__ == "__main__":
     p8 = Process(target=automate, args=(email, password, 7, ))
     p9 = Process(target=automate, args=(email, password, 8, ))
     p10 = Process(target=automate, args=(email, password, 9, ))
-
+    
+    # Start processes
     cProfile.run('p1.start()')
-    #p1.join()
-
     cProfile.run('p2.start()')
-    #p2.join()
-
     cProfile.run('p3.start()')
-    #p3.join()
-
     cProfile.run('p4.start()')
-    #p4.join()
-
     cProfile.run('p5.start()')
-    #p5.join()
-
     cProfile.run('p6.start()')
-    #p6.join()
-
     cProfile.run('p7.start()')
-    #p7.join()
-
     cProfile.run('p8.start()')
-    #p8.join()
-
     cProfile.run('p9.start()')
-    #p9.join()
-
     cProfile.run('p10.start()')
-    #p10.join()
