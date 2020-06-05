@@ -36,26 +36,20 @@ def automate(email, password, index):
             EC.visibility_of_element_located((By.NAME, 'identifier'))
         )
         eid.send_keys(email)
-        #driver.find_element_by_name("identifier").send_keys(email)
         driver.find_element_by_xpath("//*[@id='identifierNext']/span/span").click()
-        #driver.implicitly_wait(20)
         passd = WebDriverWait(driver, 150).until(
             EC.visibility_of_element_located((By.NAME, 'password'))
         )
         passd.send_keys(password)
-        #driver.find_element_by_name("password").send_keys(passwd)
         driver.find_element_by_xpath("//*[@id='passwordNext']/span/span").click()
-        #driver.implicitly_wait(30)
         emails = WebDriverWait(driver, 150).until(
             EC.visibility_of_all_elements_located((By.CLASS_NAME, 'zA'))
         )
-        #emails = driver.find_elements_by_class_name('zA')
         emails[index].click()
         content = WebDriverWait(driver, 150).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'a3s'))
         )
         body = content.text
-        #body = driver.find_element_by_class_name('a3s').text
         fname = 'body' + str(index + 1) + '.txt'
         with open(fname, 'w') as wfile:
             wfile.write(body)
